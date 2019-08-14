@@ -48,8 +48,20 @@
     			<button>Send</button>
     	</form>
     	<script src="/socket.io/socket.io.js"></script>
+    	<script src="https://code.jquery.com/jquery-1-11.1js"></script>
     	<script>
-    		var socket = io()
+    		//When a user types in a message, the server gets it as
+    		//'chat message' event.
+    		$(function(){
+    			var socket = io()
+    			$('form').submit(function(e){
+    				e.preventDefault()
+    				socket.emit('chat message', $('#m').val())
+    				$('#m').val('')
+    				return false
+    			})
+    		})
     	</script>
+
     </body>
 </html>
